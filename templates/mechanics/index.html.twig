@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mechanics index{% endblock %}
+
+{% block body %}
+    <h1>Mechanics index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Organization_id</th>
+                <th>Load_ref_date</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>File</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mechanic in mechanics %}
+            <tr>
+                <td>{{ mechanic.id }}</td>
+                <td>{{ mechanic.organizationId }}</td>
+                <td>{{ mechanic.loadRefDate ? mechanic.loadRefDate|date('Y-m-d') : '' }}</td>
+                <td>{{ mechanic.name }}</td>
+                <td>{{ mechanic.description }}</td>
+                <td>{{ mechanic.file }}</td>
+                <td>
+                    <a href="{{ path('mechanics_show', {'id': mechanic.id}) }}">show</a>
+                    <a href="{{ path('mechanics_edit', {'id': mechanic.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('mechanics_new') }}">Create new</a>
+{% endblock %}
